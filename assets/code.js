@@ -1,28 +1,14 @@
-mobiscroll.setOptions({
-    theme: 'ios',
-    themeVariant: 'light',
-    clickToCreate: true,
-    dragToCreate: true,
-    dragToMove: true,
-    dragToResize: true,
-    eventDelete: true
-});
 
-$(function () {
+ `use strict`
+ var datetime = new Date();
+ document.getElementById("currentDay").textContent = datetime; //it will print on html page
+ 
+ `use strict`;
+ function refreshTime() {
+   const timeDisplay = document.getElementById("currentDay");
+   const dateString = new Date().toLocaleString();
+   const formattedString = dateString.replace(", ", " - ");
+   timeDisplay.textContent = formattedString;
+ }
+   setInterval(refreshTime, 1000);
 
-    var inst = $('#demo-desktop-day-view').mobiscroll().eventcalendar({
-        view: {
-            schedule: { type: 'day' }
-        },
-        onEventClick: function (event, inst) {
-            mobiscroll.toast({
-                message: event.event.title
-            });
-        }
-    }).mobiscroll('getInst');
-
-    $.getJSON('https://trial.mobiscroll.com/events/?vers=5&callback=?', function (events) {
-        inst.setEvents(events);
-    }, 'jsonp');
-
-});
